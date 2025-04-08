@@ -15,7 +15,6 @@ UrlString = Annotated[
     str, BeforeValidator(lambda value: str(http_url_adapter.validate_python(value)))
 ]  # Allows the type to be a string, but ensures that the string is a URL
 
-
 MMTEB_CITATION = """@article{enevoldsen2025mmtebmassivemultilingualtext,
     title={MMTEB: Massive Multilingual Text Embedding Benchmark}, 
     author={Kenneth Enevoldsen and Isaac Chung and Imene Kerboua and Márton Kardos and Ashwin Mathur and David Stap and Jay Gala and Wissam Siblini and Dominik Krzemiński and Genta Indra Winata and Saba Sturua and Saiteja Utpala and Mathieu Ciancone and Marion Schaeffer and Gabriel Sequeira and Diganta Misra and Shreeya Dhakal and Jonathan Rystrøm and Roman Solomatin and Ömer Çağatan and Akash Kundu and Martin Bernstorff and Shitao Xiao and Akshita Sukhlecha and Bhavish Pahwa and Rafał Poświata and Kranthi Kiran GV and Shawon Ashraf and Daniel Auras and Björn Plüster and Jan Philipp Harries and Loïc Magne and Isabelle Mohr and Mariya Hendriksen and Dawei Zhu and Hippolyte Gisserot-Boukhlef and Tom Aarsen and Jan Kostkan and Konrad Wojtasik and Taemin Lee and Marek Šuppa and Crystina Zhang and Roberta Rocca and Mohammed Hamdy and Andrianos Michail and John Yang and Manuel Faysse and Aleksei Vatolin and Nandan Thakur and Manan Dey and Dipam Vasani and Pranjal Chitale and Simone Tedeschi and Nguyen Tai and Artem Snegirev and Michael Günther and Mengzhou Xia and Weijia Shi and Xing Han Lù and Jordan Clive and Gayatri Krishnakumar and Anna Maksimova and Silvan Wehrli and Maria Tikhonova and Henil Panchal and Aleksandr Abramov and Malte Ostendorff and Zheng Liu and Simon Clematide and Lester James Miranda and Alena Fenogenova and Guangyu Song and Ruqiya Bin Safi and Wen-Ding Li and Alessia Borghini and Federico Cassano and Hongjin Su and Jimmy Lin and Howard Yen and Lasse Hansen and Sara Hooker and Chenghao Xiao and Vaibhav Adlakha and Orion Weller and Siva Reddy and Niklas Muennighoff},
@@ -25,6 +24,25 @@ MMTEB_CITATION = """@article{enevoldsen2025mmtebmassivemultilingualtext,
     url={https://arxiv.org/abs/2502.13595}, 
     doi = {10.48550/arXiv.2502.13595},
 }"""
+
+MTEB_POL_MEDICAL = Benchmark(
+    name="MTEB(pol_medical, v1)",
+    tasks=MTEBTasks(
+        get_tasks(
+            tasks=[
+                "NFCorpus-PL",
+                "ArguAna-PL",
+                "SciFact-PL",
+                "TRECCOVID-PL",
+            ],
+            languages=["pol"],
+            exclusive_language_filter=True,
+        )
+    ),
+    description="""Polish Medical datasets""",
+    citation="",
+    contacts=["lion-ai"],
+)
 
 MTEB_EN = Benchmark(
     name="MTEB(eng, v2)",
@@ -545,7 +563,8 @@ MTEB_KOR = Benchmark(
     name="MTEB(kor, v1)",
     tasks=get_tasks(
         languages=["kor"],
-        tasks=[  # @KennethEnevoldsen: We could probably expand this to a more solid benchamrk, but for now I have left it as is.
+        tasks=[
+            # @KennethEnevoldsen: We could probably expand this to a more solid benchamrk, but for now I have left it as is.
             # Classification
             "KLUE-TC",
             # Reranking
@@ -825,7 +844,6 @@ MTEB_JPN = Benchmark(
     citation=None,
 )
 
-
 indic_languages = [
     "asm",
     "awa",
@@ -905,7 +923,6 @@ MTEB_INDIC = Benchmark(
     citation=MMTEB_CITATION,
     contacts=["KennethEnevoldsen", "isaac-chung"],
 )
-
 
 eu_languages = [
     # official EU languages (56) - we could include the whole economic area e.g. Norway - additioanlly we could include minority languages (probably a good idea?)
@@ -1153,7 +1170,7 @@ BEIR = Benchmark(
             "SciFact",
         ],
     )
-    + get_tasks(tasks=["MSMARCO"], languages=["eng"], eval_splits=["dev"]),
+          + get_tasks(tasks=["MSMARCO"], languages=["eng"], eval_splits=["dev"]),
     description="BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides a common and easy framework for evaluation of your NLP-based retrieval models within the benchmark.",
     reference="https://arxiv.org/abs/2104.08663",
     citation="""@article{thakur2021beir,
@@ -1396,7 +1413,7 @@ BEIR_NL = Benchmark(
         ],
     ),
     description="BEIR-NL is a Dutch adaptation of the publicly available BEIR benchmark, created through automated "
-    "translation.",
+                "translation.",
     reference="https://arxiv.org/abs/2412.08329",
     contacts=["nikolay-banar"],
     citation="""@misc{banar2024beirnlzeroshotinformationretrieval,
@@ -1548,10 +1565,10 @@ MIEB_ENG = Benchmark(
     name="MIEB(eng)",
     tasks=get_tasks(
         tasks=MIEB_common_tasks
-        + [
-            "VisualSTS17Eng",
-            "VisualSTS-b-Eng",
-        ],
+              + [
+                  "VisualSTS17Eng",
+                  "VisualSTS-b-Eng",
+              ],
     ),
     description="""MIEB(eng) is a comprehensive image embeddings benchmark, spanning 8 task types, covering 125 tasks.
     In addition to image classification (zero shot and linear probing), clustering, retrieval, MIEB includes tasks in compositionality evaluation,
@@ -1565,15 +1582,15 @@ MIEB_MULTILINGUAL = Benchmark(
     name="MIEB(Multilingual)",
     tasks=get_tasks(
         tasks=MIEB_common_tasks
-        + [
-            "WITT2IRetrieval",
-            "XFlickr30kCoT2IRetrieval",
-            "XM3600T2IRetrieval",
-            "VisualSTS17Eng",
-            "VisualSTS-b-Eng",
-            "VisualSTS17Multilingual",
-            "VisualSTS-b-Multilingual",
-        ],
+              + [
+                  "WITT2IRetrieval",
+                  "XFlickr30kCoT2IRetrieval",
+                  "XM3600T2IRetrieval",
+                  "VisualSTS17Eng",
+                  "VisualSTS-b-Eng",
+                  "VisualSTS17Multilingual",
+                  "VisualSTS-b-Multilingual",
+              ],
     ),
     description="""MIEB(Multilingual) is a comprehensive image embeddings benchmark, spanning 10 task types, covering 130 tasks and a total of 39 languages.
     In addition to image classification (zero shot and linear probing), clustering, retrieval, MIEB includes tasks in compositionality evaluation,
