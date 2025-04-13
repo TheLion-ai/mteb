@@ -42,7 +42,7 @@ def main():
 
     if not os.getenv("HF_TOKEN"):
         print("HF_TOKEN not found. Set your Hugging Face token in environment variables.")
-        #exit(1)
+        exit(1)
 
     run_mteb_evaluation(args.model, args.tasks, args.result_dir)
     save_and_upload_results(args.model, args.result_dir)
