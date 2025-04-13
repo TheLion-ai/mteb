@@ -241,6 +241,62 @@ jina_embeddings_v3 = ModelMeta(
     adapted_from="XLM-RoBERTa",
 )
 
+jina_v3_pl_med = ModelMeta(
+    loader=partial(  # type: ignore
+        JinaWrapper,
+        model="lion-ai/jina-v3-pl-med",
+        revision="98770a004b3acc8c22e276aa1588ad1dfea27ea2",
+        trust_remote_code=True,
+        model_prompts={
+            "Retrieval-query": "retrieval.query",
+            "Retrieval-passage": "retrieval.passage",
+            "Clustering": "separation",
+            "Classification": "classification",
+            "STS": "text-matching",
+            "PairClassification": "classification",
+            "BitextMining": "text-matching",
+            "MultilabelClassification": "classification",
+            "Reranking": "separation",
+            "Summarization": "text-matching",
+        },
+    ),
+    name="lion-ai/jina-v3-pl-med",
+    languages=XLMR_LANGUAGES,
+    open_weights=True,
+    revision="98770a004b3acc8c22e276aa1588ad1dfea27ea2",
+    release_date="2025-04-11",  # official release date
+    n_parameters=int(572 * 1e6),
+    memory_usage_mb=1092,
+    max_tokens=8194,
+    embed_dim=1024,
+    license="cc-by-nc-4.0",
+    similarity_fn_name="cosine",
+    framework=["Sentence Transformers", "PyTorch"],
+    use_instructions=True,
+    reference="https://huggingface.co/lion-ai/jina-v3-pl-med",
+    public_training_code=None,
+    public_training_data=None,
+    training_datasets={
+        # CulturaX
+        "STS12": [],
+        # "SICK": [],
+        # "WMT19": [],
+        # "MADLAD-3B": [],
+        # NLI
+        "MSMARCO": ["train"],
+        "MSMARCOHardNegatives": ["train"],
+        "NanoMSMARCORetrieval": ["train"],
+        "mMARCO-NL": ["train"],  # translation not trained on
+        "NQ": ["train"],
+        "NQHardNegatives": ["train"],
+        "NanoNQRetrieval": ["train"],
+        "NQ-PL": ["train"],  # translation not trained on
+        "NQ-NL": ["train"],  # translation not trained on
+        # oasst1, oasst2
+    },
+    adapted_from="XLM-RoBERTa",
+)
+
 jina_embeddings_v2_base_en = ModelMeta(
     loader=partial(
         SentenceTransformerWrapper,
