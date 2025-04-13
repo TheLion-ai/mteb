@@ -147,7 +147,7 @@ class JinaWrapper(SentenceTransformerWrapper):
         requires_package(
             self, "flash_attention", model, "pip install 'mteb[flash_attention]'"
         )
-        import flash_attn  # noqa: F401
+        #import flash_attn  # noqa: F401
 
         super().__init__(model, revision, model_prompts, **kwargs)
 
